@@ -15,7 +15,7 @@ const Home = () => {
           </Link>
         </Grid>
         <Grid item xs={4}>
-          <Link to="/showCard">
+          <Link to="/ShowCard">
             <Button variant="contained" fullWidth>
               Cards Show
             </Button>

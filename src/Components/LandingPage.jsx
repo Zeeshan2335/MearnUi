@@ -7,12 +7,11 @@ import ShowCard from "./ShowCard";
 const LandingPage = () => {
   return (
     <>
-      {/* <h1>LandingPage</h1> */}
       <BrowserRouter>
         <Home />
         <Routes>
           <Route path="/CardCreate" element={<CardCreate />} />
-          <Route path="/showCard" element={<ShowCard />} />
+          <Route path="/ShowCard" element={<ShowCard />} />
         </Routes>
       </BrowserRouter>
     </>
