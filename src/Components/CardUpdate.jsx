@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Card, CardContent, Grid, TextField } from "@mui/material";
+import { useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
 // console.log({ pdId: uuidv4() });
 
 const CardCreate = () => {
+  const navigate = useNavigate();
+  const dataReceived = useLocation();
+  const pdId = dataReceived.state.pdId;
+  const ProImg = dataReceived.state.img;
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [img, setImg] = useState("");
@@ -13,20 +18,19 @@ const CardCreate = () => {
 
   // console.log(name, price, img);
 
-  const UpateProduct = async () => {
-    const payload = { pdId: uuidv4(), name, price, img };
+  const CreateProduct = async () => {
+    const payload = { pdId, name, price, img };
     console.log("payload==>", payload);
-    const result = await axios.post("http://localhost:4040/addcards", payload);
-    // console.log(result.data);
-    setRes(result.data);
-    setName("");
-    setPrice("");
-    setImg("");
+    const result = await axios.post(
+      "http://localhost:4040/updatecards",
+      payload
+    );
+    navigate("/ShowCard");
   };
 
   return (
     <>
-      <h1>CardCreate</h1>
+      <h1>Card Update</h1>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <TextField
@@ -56,12 +60,21 @@ const CardCreate = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button onClick={UpateProduct} variant="contained" fullWidth>
-            Create Product
+          <Button onClick={CreateProduct} variant="contained" fullWidth>
+            Update Product
           </Button>
         </Grid>
         <Grid item xs={12}>
           <h1 style={{ backgroundColor: "green" }}> {res} </h1>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Card>
+            <CardContent>
+              <img src={ProImg} alt="" width={250} height={250} />
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </>
