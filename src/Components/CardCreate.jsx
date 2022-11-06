@@ -56,7 +56,12 @@ const CardCreate = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button onClick={UpateProduct} variant="contained" fullWidth>
+          <Button
+            className="btn"
+            onClick={UpateProduct}
+            variant="contained"
+            fullWidth
+          >
             Create Product
           </Button>
         </Grid>
